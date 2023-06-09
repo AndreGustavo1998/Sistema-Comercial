@@ -1,0 +1,38 @@
+create database Sistema_Comercial
+use Sistema_Comercial
+--Tabela para o forulário de Login
+
+create table Usuarios(
+ID int primary key identity,
+Nome varchar(100) not null,
+login varchar(200) not null,
+senha varchar(200) not null,
+Nivel int not null default 1,
+Ativo bit not null default 0
+)
+insert Usuarios values ('Administrador', 'admin', '123', 1, 1)
+insert Usuarios values ('Gerente', 'gerente1', 'gen123', 1, 1)
+
+
+create table Produtos(
+ID int primary key identity,
+Tipo varchar(100) not null,
+Nome_Produto varchar(100) not null,
+Quantidade varchar(50) not null,
+Valor varchar(50) not null
+)
+insert into Produtos values ( 'Eletrônico', 'Micro-Ondas', '5', '249.99' )
+insert into Produtos values ( 'Eletrônico', 'Secador', '15', '70.00' )
+insert into Produtos values ( 'Eletrônico', 'Televisão', '10', '2299.00' )
+
+create table Vendas(
+ID int primary key identity constraint fk_ID_Produto foreign key references Produtos (ID),
+Nome_Produto varchar(100) not null,
+Qtd_Vendidos varchar(100) not null,
+Valor_Total varchar(100) not null
+)
+
+insert into Vendas values ( 'Micro-Ondas', '2', '251.99' )
+insert into Vendas values ( 'Secador', '8', '560.00' )
+insert into Vendas values ( 'Televisão', '1', '2299.00' )
+select * from Vendas
